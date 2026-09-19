@@ -21,13 +21,7 @@
  *   `resolveCloudflareExtension`: `base` reshapes the superclass, `wrap`
  *   wraps the final class, and the wrapped class is what gets exported.
  */
-import {
-	type CloudflareAgentRuntime,
-	type CloudflareAttemptTaskInput,
-	type CloudflareTaskStep,
-	FLUE_ATTEMPT_TASK,
-	FLUE_DRIVE_TASK,
-} from './agent-coordinator.ts';
+import { type CloudflareAgentRuntime, FLUE_CONVERSATION_TASK } from './agent-coordinator.ts';
 import { type ExtensionClass, resolveCloudflareExtension } from './extension.ts';
 
 type CloudflareAgentInstance = Parameters<CloudflareAgentRuntime['attach']>[0];
@@ -97,10 +91,9 @@ export function createFlueAgentClass(options: CreateFlueAgentClassOptions): Exte
 		 */
 		readonly taskDefinitions: Record<string, unknown> = {
 			...inheritedTaskDefinitions(this),
-			[FLUE_DRIVE_TASK]: (_input: undefined, step: CloudflareTaskStep) =>
-				runtime.drive(this as unknown as CloudflareAgentInstance, step),
-			[FLUE_ATTEMPT_TASK]: (input: CloudflareAttemptTaskInput, step: CloudflareTaskStep) =>
-				runtime.attempt(this as unknown as CloudflareAgentInstance, input, step),
+			[FLUE_CONVERSATION_TASK]: runtime.conversationDefinition(
+				this as unknown as CloudflareAgentInstance,
+			),
 		};
 
 		onStart(props?: Record<string, unknown>) {
