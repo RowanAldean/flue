@@ -10,7 +10,7 @@ lastReviewedAt: 2026-09-21
 flue add tooling parallel
 ```
 
-The command returns a blueprint for your coding agent to apply. It creates a reusable MCP connection and mounts it in the selected agent using Flue's existing `useMcpConnection()` hook. No Parallel SDK or additional runtime dependency is needed.
+The command returns a blueprint for your coding agent to apply. Applying the guide creates a reusable MCP connection and mounts it in the selected agent using Flue's existing `useMcpConnection()` hook. The command itself does not edit files or start an agent; `--print` only displays the instructions. No Parallel SDK or additional runtime dependency is needed.
 
 ## Tools
 
@@ -28,6 +28,8 @@ The [Parallel Search MCP](https://docs.parallel.ai/integrations/mcp/search-mcp) 
 
 Model inference requires separate provider credentials and may incur charges even when MCP access is free. See Parallel's documentation for current limits. This blueprint does not implement OAuth.
 
+Your coding assistant's configured MCP server and `parallel-cli` login are not automatically inherited by Flue. Supply the key through the Flue project's secret setup for authenticated use. Keep local CLI credential-file access out of shared or deployed agent code.
+
 ## Errors and security
 
 The connection is required by default, so failed discovery stops the submission before model execution. Use `optional: true` only if the application should continue without web tools. Check credentials on 401 errors and service limits on 429 errors; never log tokens.
@@ -36,7 +38,7 @@ Queries and URLs are sent to Parallel. Do not include private information withou
 
 ## Example and updates
 
-[`examples/parallel`](https://github.com/withastro/flue/tree/main/examples/parallel) includes Node and Cloudflare configurations, a research agent, and offline connection tests. Its README explains how to run both targets and exercise search and extraction.
+[`examples/parallel`](https://github.com/withastro/flue/tree/main/examples/parallel) includes Node and Cloudflare configurations, a research agent, and offline connection tests. Its README explains how to run both targets, try OpenAI instead of Anthropic, and use a standalone Node script without an HTTP server. Preserve the existing model when adding Parallel to an established agent.
 
 ```sh
 flue update tooling parallel
