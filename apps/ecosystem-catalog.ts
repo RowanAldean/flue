@@ -367,6 +367,14 @@ export const tooling: EcosystemItem[] = [
 			'opentelemetry otel observability telemetry tracing traces otlp monitoring vendor neutral',
 	},
 	{
+		name: 'Parallel',
+		href: '/docs/ecosystem/tooling/parallel/',
+		icon: 'https://assets.parallel.ai/dark-parallel-avatar-270.svg',
+		background: '#ffffff',
+		iconClass: 'ecosystem-logo-tooling',
+		keywords: 'parallel web search extraction research mcp',
+	},
+	{
 		name: 'Sentry',
 		href: '/docs/ecosystem/tooling/sentry/',
 		icon: 'https://svgl.app/library/sentry.svg',

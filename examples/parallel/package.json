@@ -1,0 +1,24 @@
+{
+	"name": "example-parallel",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"dev": "vite dev",
+		"dev:cloudflare": "vite dev --config vite.cloudflare.config.ts",
+		"build": "vite build",
+		"build:cloudflare": "vite build --config vite.cloudflare.config.ts",
+		"check:types": "tsc --noEmit",
+		"test": "node --experimental-strip-types --test test/*.test.ts"
+	},
+	"dependencies": {
+		"@flue/runtime": "workspace:*",
+		"hono": "^4.12.32"
+	},
+	"devDependencies": {
+		"@cloudflare/vite-plugin": "^1.39.2",
+		"@flue/cli": "workspace:*",
+		"@flue/vite": "workspace:*",
+		"vite": "^8.0.14",
+		"wrangler": "^4.113.0"
+	}
+}
